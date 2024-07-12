@@ -7,8 +7,6 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-
-            try {
                 System.out.print("첫 번째 숫자를 입력하세요.");
                 int num1 = sc.nextInt();
 
@@ -21,14 +19,16 @@ public class App {
                 double result = calculator.calculate(num1, num2, operator);
                 System.out.println("결과 : " + result);
 
+                System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (y/n) : ");
+                String removeAnswer = sc. next();
+                if (removeAnswer.equalsIgnoreCase("y")) {
+                    calculator.removeResult(0);
+                }
+
                 System.out.print("연산 기록을 조회하시겠습니까? (y/n): ");
-                String answer = sc.next();
-                if (answer.equalsIgnoreCase("y")) {
-                    List<String> history = calculator.getOperationHistory();
-                    System.out.println("Operation History:");
-                    for (String h : history) {
-                        System.out.println(h);
-                    }
+                String historyAnswer = sc.next();
+                if (historyAnswer.equalsIgnoreCase("y")) {
+                    System.out.println(calculator.getOperationHistory());
                 }
 
                 System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
@@ -36,14 +36,6 @@ public class App {
                 if (exitInput.equalsIgnoreCase("exit")) {
                     break;
                 }
-
-            } catch (CalculatorException e) {
-                System.out.println("Calculator Exception: " + e.getMessage());
-                sc.nextLine();
-            } catch (Exception e) {
-                System.out.println("입력이 잘못되었습니다. 다시 시도해주세요.");
-                sc.nextLine();
-            }
         }
     }
 }
