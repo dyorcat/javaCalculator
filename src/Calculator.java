@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class Calculator {
         operationHistory = new ArrayList<>();
     }
 
-    public int calculate(int num1, int num2, char operator) throws CalculatorException {
+    public double calculate(int num1, int num2, char operator) throws CalculatorException {
         int result = 0;
         String operation = num1 + " " + operator + " " + num2;
 
@@ -39,12 +38,16 @@ public class Calculator {
                 throw new CalculatorException("올바른 연산자가 아닙니다.");
         }
 
-        operationHistory.add(operation + " = " + result);
+        addToOperationHistory(operation + " = " + result);
         return result;
     }
 
     public List<String> getOperationHistory() {
-        return operationHistory;
+        return new ArrayList<>(operationHistory);
+    }
+
+    private void addToOperationHistory(String entry) {
+        operationHistory.add(entry);
     }
 
 }
