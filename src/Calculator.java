@@ -3,8 +3,8 @@ import java.util.List;
 public class Calculator {
     private List<String> results;
 
-    public Calculator() {
-        results = new ArrayList<>();
+    public Calculator(List<String> results) {
+        this.results = results;
     }
     public double calculate(int num1, int num2, char operator)  {
         int result = 0;
