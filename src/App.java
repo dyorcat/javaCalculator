@@ -1,11 +1,9 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double[] results = new double[10];
-        int resultCount = 0;
+        LinkedList<Double> results = new LinkedList<>();
 
         while (true) {
             System.out.print("첫 번째 숫자를 입력하세요.");
@@ -41,28 +39,30 @@ public class App {
                     break;
             }
 
-            System.out.println("결과 : " + result);
+                System.out.println("결과: " + result);
+                results.add(result);
 
-            if (resultCount >= results.length ) {
-                for (int i = 1; i < results.length; i++) {
-                    results[i - 1] = results[i];
+                System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제): ");
+                String removeInput = sc.next();
+                if (removeInput.equalsIgnoreCase("remove")) {
+                    if (!results.isEmpty()) {
+                        double removedResult = results.removeFirst();
+                        System.out.println("삭제된 결과: " + removedResult);
+                    } else {
+                        System.out.println("저장된 연산 결과가 없습니다.");
+                    }
                 }
-                results[results.length - 1] = result;
-            } else {
-                results[resultCount++] = result;
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력시 조회)");
+            String inquiryInput = sc.next();
+            if (inquiryInput.equalsIgnoreCase("inquiry")) {
+                System.out.println("저장된 계산 결과 :" + results);
             }
 
-            System.out.println("저장된 결과값: " + Arrays.toString(results));
-
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+            System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String exitInput = sc.next();
             if (exitInput.equalsIgnoreCase("exit")) {
                 break;
             }
-
         }
-
-
-
     }
 }
