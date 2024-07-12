@@ -41,13 +41,18 @@ public class App {
                     break;
             }
 
-            if (resultCount < results.length ) {
-                System.out.println("결과 : " + result);
-                results[resultCount++] = result;
-                System.out.println("저장된 결과값 :" + Arrays.toString(results));
+            System.out.println("결과 : " + result);
+
+            if (resultCount >= results.length ) {
+                for (int i = 1; i < results.length; i++) {
+                    results[i - 1] = results[i];
+                }
+                results[results.length - 1] = result;
             } else {
-                System.out.println("결과 저장소가 가득 찼습니다. 더 이상 결과를 저장할 수 없습니다. ");
+                results[resultCount++] = result;
             }
+
+            System.out.println("저장된 결과값: " + Arrays.toString(results));
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String exitInput = sc.next();
